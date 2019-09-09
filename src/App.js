@@ -25,20 +25,22 @@ class App extends React.Component {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
+        // onSnapshot is an event listener that uses our anonymous function to do somethings when
+        // snapshot state changes in firebase
         userRef.onSnapshot(snapShot => {
+          console.log('snapShot', snapShot);
+          console.log('snapShot.data', snapShot.data);
           this.setState({
             currentUser: {
               id: snapShot.id,
               ...snapShot.data()
             }
-          });
+          }, () => { console.log('currentUser', this.state.currentUser) });
         });
-      } else {
-        this.setState({ currentUser: userAuth });
+      } else { // null case
+        this.setState({ currentUser: userAuth }, () => { console.log('currentUser', this.state.currentUser) });
         console.log('no Auth obtained');
       }
-
-      
     });
   }
 

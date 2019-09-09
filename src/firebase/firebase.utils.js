@@ -7,7 +7,7 @@ const config = {
   authDomain: "html-crwn-db.firebaseapp.com",
   databaseURL: "https://html-crwn-db.firebaseio.com",
   projectId: "html-crwn-db",
-  storageBucket: "",
+  storageBucket: "html-crwn-db.appspot.com",
   messagingSenderId: "407169946319",
   appId: "1:407169946319:web:b9a3c31dbf212570"
 };
@@ -21,7 +21,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if(!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
+    // create a new user if there is no data
     try {
       await userRef.set({
         displayName,
